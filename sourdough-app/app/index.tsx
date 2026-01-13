@@ -35,67 +35,68 @@ export default function Index() {
       )}
 
       {/* Main content */}
-      <View style={styles.header}>
-        {!starter ? (
-          <>
+      {!starter ? (
+        <>
+          <View style={styles.header}>
             <Text style={{ fontFamily: "NanumPenScript_400Regular", fontSize: 90 }}>
               Loaf
             </Text>
             <GlobalText style={styles.subheader}>
               The only starter guide you need.
             </GlobalText>
-          </>
-        ) : (<></>)}
-      </View>
+          </View>
 
-      <View style={styles.centerContent} >
-        {!starter ? (
-          <>
-            <TextInput
-              value={inputName}
-              onChangeText={setInputName}
-              placeholder="Enter starter name"
-              style={styles.input}
-            />
-            <Pressable
-              onPress={() => {
-                if (inputName.trim().length > 0) createStarter(inputName);
-              }}
-              style={styles.createButton}
-            >
-              <GlobalText style={styles.buttonText}>Create Starter</GlobalText>
-            </Pressable>
-          </>
-        ) : (
-          <>
-            <Animated.View
-              style={[styles.blob, { transform: [{ scale }] }]}
-            />
+          <View style={styles.centerContent} >
+            <>
+              <TextInput
+                value={inputName}
+                onChangeText={setInputName}
+                placeholder="Enter starter name"
+                style={styles.input}
+              />
+              <Pressable
+                onPress={() => {
+                  if (inputName.trim().length > 0) createStarter(inputName);
+                }}
+                style={styles.createButton}
+              >
+                <GlobalText style={styles.buttonText}>Create Starter</GlobalText>
+              </Pressable>
+            </>
+          </View>
+        </>
 
-            {/* Stats under blob, left-aligned */}
-            <View style={styles.statsWrapper}>
-              <GlobalText style={styles.statText}>Name: {starter.name}</GlobalText>
-              <GlobalText style={styles.statText}>Maturity: {starter.maturity}</GlobalText>
-              <GlobalText style={styles.statText}>Health: {starter.health}</GlobalText>
-              <GlobalText style={styles.statText}>Stage: {starter.stage}</GlobalText>
-            </View>
-          </>
-        )}
-      </View>
+      ) : (
+        <>
+          <Animated.View
+            style={[styles.blob, { transform: [{ scale }] }]}
+          />
+
+          {/* Stats under blob, left-aligned */}
+          <View style={styles.statsWrapper}>
+            <GlobalText style={styles.statText}>Name: {starter.name}</GlobalText>
+            <GlobalText style={styles.statText}>Maturity: {starter.maturity}</GlobalText>
+            <GlobalText style={styles.statText}>Health: {starter.health}</GlobalText>
+            <GlobalText style={styles.statText}>Stage: {starter.stage}</GlobalText>
+          </View>
+        </>
+      )}
 
       {/* Feed button bottom-right */}
-      {starter && (
-        <Pressable
-          onPress={() => {
-            feedStarter();
-            animatePop();
-          }}
-          style={styles.feedButton}
-        >
-          <GlobalText style={styles.buttonText}>Feed</GlobalText>
-        </Pressable>
-      )}
-    </Screen>
+      {
+        starter && (
+          <Pressable
+            onPress={() => {
+              feedStarter();
+              animatePop();
+            }}
+            style={styles.feedButton}
+          >
+            <GlobalText style={styles.buttonText}>Feed</GlobalText>
+          </Pressable>
+        )
+      }
+    </Screen >
   );
 }
 
