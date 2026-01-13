@@ -1,5 +1,6 @@
+import { NanumPenScript_400Regular, useFonts } from '@expo-google-fonts/nanum-pen-script';
 import React, { useState } from "react";
-import { Animated, Pressable, StyleSheet, TextInput, View } from "react-native";
+import { Animated, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import { GlobalText } from "../components/GlobalText";
 import { Screen } from "../components/Screen";
 import { useStarterStore } from '../stores/useStarterStore';
@@ -16,6 +17,13 @@ export default function Index() {
       Animated.timing(scale, { toValue: 1, duration: 100, useNativeDriver: true }),
     ]).start();
   };
+  let [fontsLoaded] = useFonts({
+    NanumPenScript_400Regular,
+  });
+
+  if (!fontsLoaded) {
+    return <View><Text>Loading...</Text></View>;
+  }
 
   return (
     <Screen style={{ flex: 1 }}>
@@ -27,9 +35,22 @@ export default function Index() {
       )}
 
       {/* Main content */}
-      <View style={styles.centerContent}>
+
+
+      <View style={styles.centerContent} >
         {!starter ? (
+
           <>
+            <View style={styles.header}>
+              <Text style={{ fontFamily: "NanumPenScript_400Regular", fontSize: 90 }}>
+                Loaf
+              </Text>
+              <GlobalText style={styles.subheader}>
+                The only starter guide you need.
+              </GlobalText>
+            </View>
+
+
             <TextInput
               value={inputName}
               onChangeText={setInputName}
@@ -94,7 +115,7 @@ const styles = StyleSheet.create({
   },
   centerContent: {
     flex: 1,
-    justifyContent: "center",
+    marginTop: 120,
     alignItems: "center",
   },
   input: {
@@ -104,6 +125,7 @@ const styles = StyleSheet.create({
     width: 200,
     marginBottom: 10,
     borderRadius: 5,
+    textAlign: "center",
   },
   createButton: {
     padding: 10,
@@ -142,5 +164,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     elevation: 5,
+  },
+  header: {
+    alignItems: "center",
+    paddingTop: 60,
+  },
+
+  subheader: {
+    fontFamily: "monospace",
+    fontSize: 18,
+    color: "#555",
+    marginTop: 4,
   },
 });
