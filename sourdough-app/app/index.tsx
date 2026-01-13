@@ -35,22 +35,22 @@ export default function Index() {
       )}
 
       {/* Main content */}
-
+      <View style={styles.header}>
+        {!starter ? (
+          <>
+            <Text style={{ fontFamily: "NanumPenScript_400Regular", fontSize: 90 }}>
+              Loaf
+            </Text>
+            <GlobalText style={styles.subheader}>
+              The only starter guide you need.
+            </GlobalText>
+          </>
+        ) : (<></>)}
+      </View>
 
       <View style={styles.centerContent} >
         {!starter ? (
-
           <>
-            <View style={styles.header}>
-              <Text style={{ fontFamily: "NanumPenScript_400Regular", fontSize: 90 }}>
-                Loaf
-              </Text>
-              <GlobalText style={styles.subheader}>
-                The only starter guide you need.
-              </GlobalText>
-            </View>
-
-
             <TextInput
               value={inputName}
               onChangeText={setInputName}
